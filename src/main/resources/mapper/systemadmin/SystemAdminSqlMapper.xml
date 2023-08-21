@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"><!-- 스키마정의  -->
+<!-- 홈페이지관리자 -->
+<mapper namespace="com.ssofun.www.systemadmin.mapper.SystemAdminSqlMapper">
+
+	<select id="getAdminByIdAndPw" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin WHERE login_account = #{login_account} AND login_password = #{login_password}
+	</select>
+	
+	<!-- 상품판매자 로그인확인 : 사용 X -->
+	<select id="selectShopAdminByAndPw" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin 
+		WHERE 
+			login_account = #{login_account} 
+		AND 
+			login_password = #{login_password}
+		AND
+		biz_id IS NOT NULL
+	</select>
+	
+	
+	<!-- 사이트관리자 로그인확인 : 사용X -->
+	<select id="selectSystemAdminByAndPw" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin 
+		WHERE 
+			login_account = #{login_account} 
+		AND 
+			login_password = #{login_password}
+		AND
+			biz_id IS NULL
+	</select>
+	
+	
+	
+	<select id ="selectAdminByAndPw" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin 
+		WHERE 
+			login_account = #{login_account} 
+		AND 
+			login_password = #{login_password}
+	
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	<select id="selectQnaByNonAnswer" resultType="com.ssofun.dto.QnaDto">
+		select * from tb_qna where answer_contents is null and biz_id is null order by qna_id
+	</select>
+	
+	
+	<select id="selectQnaNotNullAnswer" resultType="com.ssofun.dto.QnaDto">
+		select * from tb_qna where answer_contents is not null and biz_id is null order by qna_id DESC
+	</select>
+	
+	
+	<select id="selectQnaDataBYQnaId" resultType="com.ssofun.dto.QnaDto">
+		select * from tb_qna where qna_id = #{qna_id} and biz_id is null 
+	</select>
+	
+	<select id="selectQnaImageByQnaId" resultType="com.ssofun.dto.Qna_ImageDto">
+		select * from tb_qna_image where qna_id = #{qna_id}  
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+<!--user_id로 유저정보가져오기 -->
+	<select id="selectUserDtoByUserId" resultType="com.ssofun.dto.UserDto">
+	 select * from tb_User where user_id = #{user_id}  
+	</select>
+	
+
+
+<!-- qna답변달기 -->
+	<update id="updateQnaAnswer">
+		UPDATE tb_qna SET answer_contents = #{answer_contents},answer_created_at = now() WHERE qna_id = #{qna_id}
+	</update>
+	
+	<select id="selectById" resultType="com.ssofun.dto.QnaDto">
+		SELECT * FROM tb_qna where id = #{id}  
+	</select>
+
+
+
+<!-- faq관련 -->
+
+	<!-- faq글삽입 -->
+	<insert id="systemAdminCreateFaq">
+		INSERT INTO tb_faq(admin_id ,faq_category,title ,contents, created_at,used_fg)
+		VALUES(#{admin_id},#{faq_category},#{title},#{contents}, now(),1)
+	</insert>
+	
+	
+	<!-- faq글목록가져오기 -->
+	<select id="selectAllFaq" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq ORDER BY faq_id DESC		
+	</select>
+	
+	
+	<!-- adminid에 해당되는 admin정보 가져옴 -->
+	<select id="selectAdminDtoByAdminId" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin where admin_id = #{adminId}
+	</select>
+	
+	
+	<!-- faqId로 해당되는 faq글 가져옴 -->
+	<select id="selectFaqDtoByfaqId" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq WHERE faq_id = #{faqId}
+	</select>
+	
+	<!-- faqid로 글수정 -->
+	<update id="updateFaqDataByFaqId">
+		UPDATE tb_faq SET faq_category = #{faq_category},title = #{title}, contents = #{contents} WHERE faq_id = #{faq_id}	
+	</update>
+
+	<!-- faqid로 글삭제 -->
+	<delete id="deleteFaqDataByFaqId">
+		DELETE FROM tb_faq WHERE faq_id = #{faqId}
+	</delete>
+	
+
+	
+	
+
+
+
+<!-- 카테고리별 글정보가져옴 -->
+	<select id="selectFaqFunding" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq tf
+		WHERE tf.faq_category = 'categoryFunding'	
+	</select>
+	
+	<select id="selectFaqStore" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq tf
+		WHERE tf.faq_category = 'categoryStore'	
+	</select>
+
+	<select id="selectFaqShipping" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq tf
+		WHERE tf.faq_category = 'categoryShipping'	
+	</select>
+	
+	<select id="selectFaqUser" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq tf
+		WHERE tf.faq_category = 'categoryUser'	
+	</select>
+	
+	<select id="selectFaqCustomerService" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq tf
+		WHERE tf.faq_category = 'categoryCustomerService'	
+	</select>
+	
+	
+	<!-- faq에 도움의견넣기 -->
+	<insert id="FaqHelpStatus">
+		INSERT INTO tb_faq_HelpStatus(faq_id ,helpStatus, created_at,used_fg)
+		VALUES(#{faq_id},#{helpStatus}, now(),1)
+	</insert>
+	
+	
+	<!-- faq 도움되는글 상위10개 -->
+	<select id="selectTop10HelpfulFaq" resultType="com.ssofun.dto.FaqDto">
+		  SELECT faq_id, COUNT(*) AS helpful_count
+		  FROM tb_faq_HelpStatus
+		  WHERE helpStatus = 'helpful'
+		  GROUP BY faq_id
+		  ORDER BY helpful_count DESC
+		  LIMIT 10
+	</select>
+	
+	
+	
+	
+	
+<!-- 입점사관리 -->
+	
+	<!-- 업체등록 -->
+	<insert id="createCompanyAccount">
+		INSERT INTO tb_biz(biz_name,biz_no,biz_phone,biz_ceo,biz_place ,created_at,used_fg)
+		VALUES(#{biz_name},#{biz_no},#{biz_phone},#{biz_ceo},#{biz_place} ,now(),1)
+	</insert>
+	
+	
+	<!-- 업체목록(등록일순) -->
+	<select id="bizDtoList" resultType="com.ssofun.dto.BizDto">
+		SELECT * FROM tb_biz ORDER BY biz_id DESC
+	</select>
+	
+	<!-- bizid로 해당업체정보가져오기 -->
+	<select id="selectBizDataBybizId" resultType="com.ssofun.dto.BizDto">
+		SELECT * FROM tb_biz WHERE biz_id=#{biz_id}
+	</select>
+	
+	
+	<!-- 입점업체에 해당하는 판매자수 -->
+	<select id="countAdminByBizId" resultType="int">
+		SELECT COUNT(*) as admin_count FROM tb_admin WHERE biz_id = #{biz_id}
+	</select>
+	
+	
+	
+	<!-- 입점사정보수정 -->
+	<update id="updateCompanyData">
+		UPDATE tb_biz SET biz_name = #{biz_name}, biz_no = #{biz_no}, biz_phone=#{biz_phone}, biz_ceo=#{biz_ceo}, biz_place =#{biz_place} WHERE biz_id = #{biz_id}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+<!-- 판매자관리 -->
+
+	<!-- biz_id소속인 판매자 리스트 -->
+	<select id="selectAdminDtoListByBizId" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin WHERE biz_id = #{biz_id} ORDER BY admin_id DESC
+	</select>
+	
+	
+	
+	<!-- 판매자등록 -->	
+	<insert id="createVenderAccount">
+		INSERT INTO tb_admin(biz_id,login_account,login_password,admin_nickname,admin_phone,admin_received_report,admin_report_description, created_at,used_fg)
+		VALUES(#{biz_id},#{login_account},#{login_password},#{admin_nickname},#{admin_phone},#{admin_received_report},#{admin_report_description},now(),1)
+	</insert>
+	
+	
+	<!--전체판매자목록가져오기(최근등록순) -->
+	<select id="selectAdminDtoList" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin WHERE biz_id IS NOT NULL ORDER BY admin_id DESC
+	</select>
+	
+	
+	
+	<!-- admin_id로 admin정보 가져오기 -->
+	<select id="getAdminDataByAdminId" resultType="com.ssofun.dto.AdminDto">
+		SELECT * fROM tb_admin where admin_id = #{admin_id}
+	</select>
+	
+	<!--계정활성화-->
+	<update id="adminAccountActivation">
+		UPDATE tb_admin SET used_fg = 1 WHERE admin_id = #{admin_id}
+	</update>
+
+	<!--계정비활성화-->	
+	<update id="adminAccountDeactivation">
+		UPDATE tb_admin SET used_fg = 0 WHERE admin_id = #{admin_id}
+	</update>
+	
+	<!-- 입점회사전체목록 -->
+	<!-- <select id="selectAllBizName" resultType="com.ssofun.dto.BizDto">
+		SELECT biz_name FROM tb_biz;
+	</select> -->
+	
+	
+	
+	
+	
+<!-- 사이트관리 -->	
+	
+	<!--펀딩창작자정보가져옴 -->
+	<select id="fundingCreatorBycreatorId" resultType="com.ssofun.dto.UserCreatorDto">
+		select * from tb_user_creator where user_creator_id = #{creatorId};
+	</select>
+	
+	
+	
+	<!-- 미승인된 펀딩정보가져옴 -->
+	<select id="getUnauthorizedFunding" resultType="com.ssofun.dto.FundingDto">
+		SELECT * FROM tb_funding WHERE confirm_fg = 0 
+	</select>
+	
+	
+	
+	<!-- 승인완료된 펀딩정보가져옴 -->
+	<select id="getFundingData" resultType="com.ssofun.dto.FundingDto">
+		SELECT * FROM tb_funding WHERE confirm_fg = 1 ORDER BY funding_id DESC
+	</select>
+	
+	
+	
+	<!-- 펀딩승인함 -->
+	<update id="fundingApproval">
+		UPDATE tb_funding SET confirm_fg = 1 WHERE funding_id = #{funding_id}
+	</update>
+	
+	
+	<!-- 펀딩사이트카테고리추가 -->
+	<insert id="fundingCategoryAdd">
+		INSERT INTO tb_funding_category(name,image_url,created_at,used_fg)
+		VALUES(#{name},#{image_url},now(),1)
+	</insert>
+	
+	<!-- 펀딩카테고리목록가져옴 -->
+	<select id="getFundingCategpryDto" resultType="com.ssofun.dto.FundingCategoryDto">
+		SELECT * FROM tb_funding_category
+	</select>	
+
+</mapper>

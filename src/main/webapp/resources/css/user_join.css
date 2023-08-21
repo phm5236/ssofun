@@ -1,0 +1,57 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400&display=swap'); */
+
+
+*{margin: 0; padding: 0; list-style: none; font-family: 'Inter', sans-serif; font-weight: 400; box-sizing: border-box;}
+body{position: relative;}
+a{text-decoration: none; color: black;}
+.section{width: 1200px; margin: 0 auto; position: relative; }
+.section2{width: 1000px; margin: 0 auto;}
+.active-cate{border: 1px solid black; border-radius: 5px;}
+/* div{border: 1px solid grey;} */
+
+.hide{display: none;}
+
+#logo{text-align: center;  height: 37px; line-height: 37px; margin: 110px 0 45px 0; }
+#logo>a{font-weight: bold; color: #cfcfcf; font-size: 37px;}
+
+#joinSection{width: 460px; height: auto; margin: 0 auto; position: relative;}
+#snsJoin{width: 100%; height: auto; margin-bottom: 60px;}
+#snsJoin>h5{font-size: 20px; line-height: 20px; height: 20px; margin-bottom: 22px; font-weight: bold; color: #333333;}
+
+#snsJoin>ul{width: 100%; margin: 0 auto; height: 40px; padding: 0;}
+#snsJoin>ul>li{cursor: pointer; width: 146px; height: 100%; border-radius: 5px; float: left; margin-right: 11px;}
+#snsJoin>ul>li#kakao{background-color: #fee500;}
+#snsJoin>ul>li#naver{background-color: #03c75a;}
+#snsJoin>ul>li#google{border: 1px solid #c2c2c2; margin: 0;}
+
+#emailJoin{width: 100%; height: auto;}
+#emailJoin>h5{font-size: 20px; line-height: 20px; height: 20px; margin-bottom: 22px; font-weight: bold; color: #333333;}
+#emailJoin>ul{width: 100%; margin: 0 auto; height: auto; padding: 0;}
+#emailJoin>ul>li{width: 100%; height: 78px; margin-bottom: 20px; border-radius: 5px; font-size: 15px; color: #555555;}
+#emailJoin>ul>li:nth-child(3){height: 132px;}
+#emailJoin>ul>li:nth-child(7){height: auto; display: flex; justify-content: space-between; margin-bottom: 35px;}
+#emailJoin>ul>li:last-child{height: 50px; margin-bottom: 0;}
+
+#emailJoin>ul>li>span{display: block; margin-top: 4px; height: 50px; width: 100%;}
+#emailJoin>ul>li:nth-child(7)>span{display: block; height: auto; width: 420px; margin-top: 0; font-size: 12px;}
+#emailJoin>ul>li:nth-child(7)>input[type=checkbox]{height: 20px; width: 20px; margin-top: 6px; border: 1px solid #d9d9d9;}
+
+#emailJoin>ul>li:nth-child(6)>span>input{color: #666666; width: 225px; margin-right: 5px; background-color: white; font-size: 16px;}
+#emailJoin>ul>li:nth-child(6)>span>input:last-of-type{margin-right: 0}
+#emailJoin>ul>li:nth-child(6)>span>input.click{border-color: #FF6462; color: #FF6462; font-weight: bold;}
+
+#emailJoin>ul>li:last-child>input{margin-bottom: 110px; width: 100%; height: 100%; border-radius: 5px; font-size: 16px; line-height: 50px; color: white; font-weight: bold; border: none; background-color: #FF6462;}
+
+#emailJoin>ul>li>span>input{width: 100%; height: 100%; border: 1px solid #d9d9d9; font-size: 16px; line-height: 50px; border-radius: 5px; padding: 0 15px;}
+
+#emailJoin>ul>li>span>b{color: #333333; width: 100%; display: block; font-size: 16px; height: 28px; line-height: 28px;}
+
+
+
+
+
+
+
+

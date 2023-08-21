@@ -1,0 +1,54 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400&display=swap'); */
+
+
+*{margin: 0; padding: 0; list-style: none; font-family: 'Inter', sans-serif; font-weight: 400; box-sizing: border-box;}
+body{position: relative;}
+a{text-decoration: none; color: black;}
+.section{width: 1200px; margin: 0 auto; position: relative; }
+.section2{width: 1000px; margin: 0 auto;}
+.active-cate{border: 1px solid black; border-radius: 5px;}
+/* div{border: 1px solid grey;} */
+
+.hide{display: none;}
+
+#logo{text-align: center;  height: 37px; line-height: 37px; margin: 160px 0 45px 0; }
+#logo>a{font-weight: bold; color: #333333; font-size: 37px;}
+
+#loginSection{width: 460px; height: auto; border: 1px solid transparent; margin: 0 auto; position: relative;}
+#loginTab{width: 100%; height: 65px; padding: 0; margin: 0; position: relative; overflow: hidden; } 
+#loginTab>li{cursor: pointer; z-index: 0; position: absolute; left: 0; top: 0; width: 235px; height: 70px; border: 1px solid #dddddd; border-radius:10px 10px 0 0; font-size: 16px; line-height: 60px; color: #777777; text-align: center; background-color: #f7f7f7;}
+#loginTab>li.click{z-index: 5; color: #333333; background-color: white;}
+#loginTab>li#admin{left: unset; right: 0;}
+
+#loginSection>p#cover{width: 440px; position: absolute; top: 59px; left: 5px; height: 10px; background-color: white; z-index: 6; margin: 0 auto;}
+
+#userLogin, #adminLogin{width: 100%; height: 255px; border: 1px solid #dddddd; padding: 22px 28px; border-radius: 0 10px 10px 10px; z-index: 3; position: absolute; top: 58px; background-color: white; overflow: hidden;}
+#userLogin>li, #adminLogin>li{width: 100%; height: 48px; margin-bottom: 5px;}
+#userLogin>li>input, #adminLogin>li>input{width: 100%; height: 100%; border-radius: 5px; border: 1px solid #dadada; padding: 0 15px;}
+
+#userLogin>li:nth-child(3), #adminLogin>li:nth-child(3){width: 100%; height: 15px; line-height: 15px; text-align: right; margin-top: 10px;}
+#userLogin>li:nth-child(3)>a, #adminLogin>li:nth-child(3)>a{color: #999999; font-size: 13px;}
+
+#userLogin>li:last-child, #adminLogin>li:last-child{width: 100%; height: 60px; margin: 23px 0 0 0;}
+#userLogin>li>input#userLoginBtn, #adminLogin>li>input#adminLoginBtn{width: 100%; height: 100%; background-color: #FF6462; color: white; font-weight: bold; font-size: 20px; border: none; border-radius: 6px;}
+
+#userApiLogin{width: 169px; margin: 0 auto; height: 48px;  margin-top: 290px; padding: 0;}
+#userApiLogin>li{overflow: hidden; cursor: pointer; width: 48px; height: 100%; border-radius: 48px; display: inline-block; margin-right: 8px; position: relative;}
+#userApiLogin>li#kakao{background-color: #f3de16;}
+#userApiLogin>li#naver{background-color: #00c304;}
+#userApiLogin>li#google{border: 1px solid #c2c2c2; margin: 0;}
+#userApiLogin>li>img{width: 32px; position: absolute; top: 8px; left: 50%; margin-left: -16px;}
+#userApiLogin>li#google>img{width: 20px; margin-left: -10px; top: 13px;}
+
+p#userJoin{width: 100%; height: 30px; line-height: 30px; font-size: 15px; color: #999999; text-align: center; margin: 40px 0 0 0;}
+p#userJoin>a{font-size: 15px; color: #333333;  margin-left: 5px; text-decoration: underline;}
+
+
+
+
+
+
+
+

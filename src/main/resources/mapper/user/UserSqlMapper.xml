@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssofun.www.user.mapper.UserSqlMapper">
+
+	<!-- 카카오아이디로 계정정보 조회 -->
+	<select id="selectUserByKakaoId" resultType="com.ssofun.dto.UserDto">
+		SELECT * FROM tb_user WHERE token = #{id}
+	</select>
+
+	<!-- 생년 임시로 출력 -->
+	<select id="selectBirthByAgeRange" resultType="String">
+		SELECT DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -(#{age}-1) YEAR),"%Y")
+	</select>
+	
+	<!-- 카카오계정정보로 회원가입 -->
+	<insert id="insertUserByKakao" parameterType="com.ssofun.dto.UserDto" keyProperty="user_id">
+		INSERT INTO tb_user(email,token,name,gender,birth,nickname) 
+		VALUES(#{email},#{token},#{name},#{gender},#{birth},#{nickname})
+	
+		<!-- PK 조회를 위한 selectKey -->
+		<selectKey keyProperty="user_id" resultType="java.lang.Long" order="AFTER">
+		  SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 유저아이디로 유저정보 조회 -->
+	<select id="selectUserByUserId" resultType="com.ssofun.dto.UserDto">
+		SELECT * FROM tb_user WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- 이메일 업데이트 -->
+	<update id="updateEmail">
+		UPDATE tb_user SET email = #{userDto.email}
+		WHERE user_id = #{user_id}
+	</update>
+	
+	<!-- 이름 및 마케딩 수신동의 변경 -->
+	<update id="updateUserNameAgree">
+		UPDATE tb_user SET name = #{userDto.name}, agree_sms = #{userDto.agree_sms}
+		WHERE user_id = #{user_id}
+	</update>
+	
+	<!-- 유저이름 조회 -->
+	<select id="selectUserName" resultType="String">
+		SELECT name FROM tb_user WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- 이메일 회원가입 -->
+	<insert id="insertEmailJoin" parameterType="com.ssofun.dto.UserDto" keyProperty="user_id">
+		INSERT INTO tb_user(email,name,password,gender,birth,nickname,agree_sms) 
+		VALUES(#{email},#{name},#{password},#{gender},#{birth},#{nickname},#{agree_sms})
+	
+		<!-- PK 조회를 위한 selectKey -->
+		<selectKey keyProperty="user_id" resultType="java.lang.Long" order="AFTER">
+		  SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 이메일 로그인 -->
+	<select id="selectUserByEmailPassword" resultType="com.ssofun.dto.UserDto">
+		SELECT * FROM tb_user 
+		WHERE email = #{email} AND password = #{password} AND used_fg = 1
+	</select>
+	
+	
+	
+	
+	
+	
+	<!-- 펀딩 주문목록 조회 -->
+	<select id="selectFundingOrderList" resultType="com.ssofun.dto.FundingOrderDto">
+		SELECT * FROM tb_funding_order WHERE user_id = #{user_id} AND used_fg = 1 ORDER BY funding_order_id DESC
+	</select>
+	
+	<!-- 펀딩 리워드 주문목록 조회 -->
+	<select id="selectFundingRewardOrderList" resultType="com.ssofun.dto.FundingRewardOrderDto">
+		SELECT * FROM tb_funding_reward_order WHERE funding_order_id = #{funding_order_id}
+	</select>
+	
+	<!-- 펀딩 리워드 조회 -->
+	<select id="selectFundingReward" resultType="com.ssofun.dto.FundingRewardDto">
+		SELECT * FROM tb_funding_reward WHERE funding_reward_id = #{funding_reward_id}
+	</select>
+	
+	<!-- 펀딩 조회 -->
+	<select id="selectFunding" resultType="com.ssofun.dto.FundingDto">
+		SELECT * FROM tb_funding WHERE funding_id = #{funding_id}
+	</select>
+	
+	<!-- 펀딩 섬네일 목록 조회 -->
+	<select id="selectFundingThumbnailList" resultType="com.ssofun.dto.FundingThumbnailDto">
+		SELECT * FROM tb_funding_thumbnail WHERE funding_id = #{funding_id}
+	</select>
+	
+	
+	
+	
+	
+	
+	<!-- 찜한 펀딩 목록 조회 -->
+	<select id="selectLikeFundingList" resultType="com.ssofun.dto.FundingDto">
+		SELECT f.* FROM tb_funding f, tb_funding_favorit ff
+		WHERE f.funding_id = ff.funding_id AND ff.user_id = #{user_id} AND ff.used_fg = 1
+	</select>
+	
+	<!-- 펀딩 카테고리명 조회 -->
+	<select id="selectFundingCategoryName" resultType="String">
+		SELECT name FROM tb_funding_category WHERE funding_category_id = #{funding_category_id}
+	</select>
+	
+	<!-- 펀딩 달성액 조회 -->
+	<select id="selectAchievementPrice" resultType="long">
+		select IFNULL(SUM(fo.total_price),0) from tb_funding_reward_order fro, tb_funding_reward fr, tb_funding_order fo
+		WHERE fro.funding_reward_id = fr.funding_reward_id AND fo.funding_order_id = fro.funding_order_id 
+		AND fo.used_fg = 1 AND fr.funding_id = #{funding_id}
+	</select>
+	
+	<!-- 남은 펀딩기간 조회 -->
+	<select id="selectDday" resultType="int">
+		SELECT DATEDIFF(close_at, SYSDATE()) FROM tb_funding_reward WHERE funding_id = #{funding_id} ORDER BY close_at DESC LIMIT 1
+	</select>
+	
+	
+	<!-- 유저 핸드폰 번호 변경 -->
+	<update id="updateUserPhone">
+		UPDATE tb_user SET phone = #{userDto.phone} WHERE user_id = #{user_id}
+	</update>
+	
+	
+	<!-- 창작자 아이디 출력 -->
+	<select id="selectUserCreatorId" resultType="Long">
+		SELECT user_creator_id FROM tb_user_creator WHERE user_id = #{user_id}
+	</select>
+	
+</mapper>

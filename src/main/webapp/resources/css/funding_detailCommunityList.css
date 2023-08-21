@@ -1,0 +1,112 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400&display=swap');
+
+*{margin: 0; padding: 0; list-style: none;font-family: 'Inter', sans-serif; box-sizing: border-box;}
+body{position: relative;}
+a{text-decoration: none; color: black;}
+.section{width: 1200px; margin: 0 auto;}
+.section2{width: 1000px; margin: 0 auto;}
+.active-cate{border: 1px solid black; border-radius: 5px;}
+/* div{border: 1px solid grey;} */
+
+#projectIntroduction{margin-bottom: 80px;}
+
+#category-name{height: 60px;}
+#category-name>h6{line-height: 60px; color: #999999;}
+
+#title{height: 45px; margin-bottom: 30px;}
+#title>h3{line-height: 45px; font-weight: bold;}
+
+#thumbnail{width: 575px; height: 480px; border: 1px solid transparent; position: relative;}
+#thumbnail>ul{position: absolute;}
+#thumbnail>#moveLeft{cursor:pointer; width: 24px; height: 24px; padding: 0; left: 0; top: 213px;}
+#thumbnail>#moveLeft>li{width:13px; height:13px; border-left: 1px solid black;transform-origin: bottom left; transform: rotate(45deg); margin: 0;}
+#thumbnail>#moveLeft>li:last-child{transform-origin: top left;transform: rotate(-45deg);}
+
+/* #thumbnail>#thumb{left: 36px; top: 0;width: 500px; height: 450px; padding: 0;}
+#thumbnail>#thumb>li{float: left; width: 500px; height: 450px; background-color: #D9D9D9; font-size: 25px; line-height: 450px;} */
+#thumbnail>#thumbBox{position: absolute; left: 36px; top: 0;width: 500px; height: 450px; padding: 0; overflow: hidden;}
+#thumbnail>#thumbBox>#thumb{position: absolute; top: 0; left: 0; width: 1000px; height: 450px; padding: 0;}
+#thumbnail>#thumbBox>#thumb>li{float: left; width: 500px; height: 450px; font-size: 25px; line-height: 450px;}
+#thumbnail>#thumbBox>#thumb>li>img{width: 100%; height: 100%;}
+
+#thumbnail>#moveRight{cursor:pointer; width: 24px; height: 24px; top: 213px; right: 13px; margin: 0;}
+#thumbnail>#moveRight>li{width:13px; height:13px; border-right: 1px solid black;transform-origin: bottom right; transform: rotate(-45deg); margin: 0;}
+#thumbnail>#moveRight>li:last-child{transform-origin: top right; transform: rotate(45deg);}
+
+#thumbnail>#swiper{height: 15px; bottom: 0;}
+#thumbnail>#swiper>li{float: left; margin-right: 8px; width: 15px; height: 15px; background-color: #bfbfbf; border-radius: 15px;}
+#thumbnail>#swiper>li.activeBtn{width: 25px; background-color: #333333;}
+#thumbnail>#swiper>li:last-child{margin-right: 0;}
+
+#aside{border: 1px solid transparent; width: 425px;}
+#aside>ul{padding-left: 50px;}
+#aside>ul>li{text-align: left; font-size: 24px; line-height: 24px; margin-bottom: 20px;}
+#aside>ul>li:first-child{ height: 74px; font-size: 16px; line-height: 20px; padding-bottom: 18px; border-bottom: 1px solid #efefef; margin-bottom: 8px;}
+#aside>ul>li:nth-child(4){margin-bottom: 48px;}
+#aside>ul>li>span.first{display: block; color: #999999; font-size: 14px; margin-bottom: 14px;}
+#aside>ul>li>b{font-weight: normal; font-size: 21px;}
+#aside>ul>li>span#achieve{font-size: 16px; color: #999999; margin-left: 12px;}
+#aside>ul>li#endtime>span:last-of-type{font-size: 12px; margin-left: 16px;}
+#aside>ul>li>ul{padding: 0; margin: 0;}
+#aside>ul>li>ul>li:first-child{font-size: 14px; margin-bottom: 20px;}
+#aside>ul>li>ul>li:first-child>i{margin-right: 3px; font-size: 15px; font-weight: bold;}
+
+#aside>ul>li>ul>li#likeBtn{float: left; cursor: pointer; margin-right: 17px; text-align: center; font-size: 12px; width: 50px; height: 50px; border: 1px solid #bfbfbf; border-radius: 5px;}
+#aside>ul>li>ul>li#likeBtn>i{font-size: 17px;display: block; margin-top: 5px; margin-bottom: -6px;}
+#aside>ul>li>ul>li#supportBtn{float: left; cursor: pointer; text-align: center; width: 305px; height: 50px; line-height: 50px; font-size: 16px; background-color: #ff6462;border-radius: 5px;color: white;}
+
+#tab{position: relative; height: 60px;}
+#tab>ul{float: left; height: 60px; background-color: white;}
+#tab>ul>li{cursor: pointer; float: left; margin-right: 36px; font-weight: bolder; color: #999999; line-height: 60px; }
+#tab>ul>li#reward{color: #ff6462;}
+#tab>ul>li#reward>i{font-size: 15px; font-style: normal;}
+#tab>ul>li#reward>span{display: inline-block; margin-left: 25px; background-color: #bfbfbf; height: 10px; width: 1px;}
+#tab>ul>li>a.activeTab{color: black;}
+#tab>ul>li>a{color: #999999;}
+
+.hide{display: none;}
+
+#tab>#rewardModal{border: 1px solid black; padding: 0; background-color: white; z-index: 50; width: 400px; max-height: 600px; overflow-y: scroll; text-align: left;}
+#tab>#rewardModal::-webkit-scrollbar{width: 6px;}
+#tab>#rewardModal::-webkit-scrollbar-thumb{background-color: #e4e4e4; border-radius: 10px;}
+#tab>#rewardModal::-webkit-scrollbar-track{background-color: white;}
+#tab>#rewardModal>dl{cursor: pointer; padding: 25px 20px 25px 20px; margin-bottom: 0;}
+#tab>#rewardModal>dl:hover{background-color: #ececec;}
+#tab>#rewardModal>dl:last-of-type{ margin-bottom: 0;}
+#tab>#rewardModal>dl>dt{font-size: 20px; margin-bottom: 8px; line-height: 20px;}
+#tab>#rewardModal>dl>dt>b{font-size: 18px;}
+#tab>#rewardModal>dl>dd{font-size: 12px; color: #666666; margin-bottom: 12px;}
+#tab>#rewardModal>dl>dd.ddFirst{color: #999999; margin-bottom: 8px;}
+#tab>#rewardModal>dl>dd.ddNthTwo{color: #333333; font-weight: bolder; margin-bottom: 20px;}
+#tab>#rewardModal>dl>dd.item{font-size: 12px; line-height: 14px; margin-bottom: 3px;}
+#tab>#rewardModal>dl>dd.stock{margin-top: 23px;}
+#tab>#rewardModal>dl>dd.ddLast{margin-bottom: 0;}
+#tab>#rewardModal>dl>dd>span{display: inline-block; width: 90px;}
+
+/* 여기부터 상세페이지 탭별로 다르게 작성 */
+
+#content{margin-bottom: 70px; text-align: left;}
+#content>div{padding: 0; position: relative; padding: 52px 0 53px 0; border-bottom: 1px solid #efefef;}
+#content>div#communityEmpty{margin-bottom: 0; text-align: center; font-size: 15px; height: 185px; line-height: 45px; color: #999999;}
+#content>div#communityEmpty>i{display: block; text-align: center; font-size: 50px; color: #d9d9d9; line-height: 50px;}
+
+#content>div:last-of-type{border-bottom: none;}
+
+#content>div.input{width: 100%; height: 118px; margin-top: 40px; padding: 0; border-bottom: 0;}
+#content>div.input>input[type=text]{width: 100%; height: 64px; border: 1px solid #bfbfbf; padding: 0 20px 0 20px; margin-bottom: 12px; border-radius: 5px;}
+#content>div.input>input[type=button]{float: right; width: 100px; height: 40px; font-size: 12px; border: none; background-color: #bfbfbf; border-radius: 5px; z-index: 1000;}
+
+#content>div>div.noticeList{padding: 0; height: 190px; position: relative; overflow: hidden;}
+#content>div>div>.noticeWriter{width: 100%; padding: 0; margin: 0; height: 50px; border: 1px solid transparent; position: relative; margin-bottom: 30px;}
+#content>div>div>.noticeWriter>li{padding: 0;}
+#content>div>div>.noticeWriter>li.profile{float: left; width: 50px; height: 50px; margin-right: 15px; background-color: #d9d9d9; border-radius: 50px;}
+#content>div>div>.noticeWriter>li.name{font-size: 13px; color: #333333; height: 15px; line-height: 15px; margin-top: 9px;}
+#content>div>div>.noticeWriter>li.name>span{display: inline-block; margin-left: 5px; width: 40px; height: 15px; 
+    text-align: center; font-size: 6px; line-height: 16px; background-color: #ff6462; color: white;}
+#content>div>div>.noticeWriter>li:last-child{height: 25px; color: #bfbfbf; font-size: 13px;}
+
+#content>div>div>div.noticeContent{margin: 0; font-size: 14px; line-height: 18px; margin-bottom: 60px;}
+
+#content>div>a.moreBtn{position: absolute; bottom:54px; left: 0; width: 100%; height: 108px; border: 1px solid transparent;}
+

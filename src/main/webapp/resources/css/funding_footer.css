@@ -1,0 +1,49 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400&display=swap');
+
+*{margin: 0; padding: 0; list-style: none;font-family: 'Inter', sans-serif;}
+a{text-decoration: none; color: black;}
+.section3{width: 1200px; margin: 0 auto;}
+
+footer{width: 100%; height: 260px; border-top: 1px solid #e9e9e9;}
+footer>div{height: 100%;}
+
+footer>div>#leftSection{ width: 205px; height: 100%; float: left; margin-right: 80px;}
+footer>div>#leftSection>dl{width: 100%; height: auto; padding: 40px 0 0 0;}
+footer>div>#leftSection>dl>dt{margin-bottom: 12px; font-size: 15px; height: 17px; line-height: 17px; color: #333333; font-weight: bold;}
+footer>div>#leftSection>dl>dt>i{margin-right: 3px;}
+footer>div>#leftSection>dl>dd{height: 15px; cursor: pointer; margin-bottom: 12px; font-size: 12px; height: 15px; line-height: 15px; color: #333333;}
+footer>div>#leftSection>dl>dd:nth-of-type(3){padding-bottom: 20px; height: 35px; border-bottom: 1px solid #ececec;}
+footer>div>#leftSection>dl>dd>i{font-size: 13px; margin-left: 10px;}
+footer>div>#leftSection>dl>dd>a{width: 100%; height: 100%; display: inline-block;}
+footer>div>#leftSection>dl>dd>a>i{margin-left: 10px;}
+
+footer>div>#leftSection>dl>dd:last-of-type{font-size: 11px; height: 13px; line-height: 13px; font-weight: bold; color: #777777;}
+footer>div>#leftSection>dl>dd:last-of-type>span{display: block; margin-top: 5px; font-weight: normal; font-size: 10px; height: 12px; line-height: 12px;}
+
+footer>div>#rightSection{ width: 830px; height: 100%; float: right;}
+footer>div>#rightSection>ul{width: 100%; padding: 0; margin-bottom: 0;}
+footer>div>#rightSection>ul:first-of-type{margin-top: 34px;}
+footer>div>#rightSection>ul>li{display: inline; font-size: 11px; line-height: 13px; height: 13px; color: #444444;}
+footer>div>#rightSection>ul>li::after{content: "|"; color: #d9d9d9; margin: 0 5px;}
+footer>div>#rightSection>ul>li:last-child::after{content: "";}
+
+footer>div>#rightSection>p{font-size: 11px; margin-bottom: 0; height: 13px; line-height: 20px; margin-top: 10px; color: #888888;}
+footer>div>#rightSection>p:last-of-type{margin-top: 5px;}
+
+footer>div>#rightSection>ul#etc{margin-top: 30px;}
+footer>div>#rightSection>ul#etc>li{cursor: pointer; margin-right: 20px; font-weight: bold; font-size: 13px; line-height: 15px; height: 15px;}
+footer>div>#rightSection>ul#etc>li::after{content: "";}
+
+
+
+
+
+
+
+
+
+
+
+
+

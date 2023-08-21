@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssofun.www.integration.mapper.IntegratedAuthenticationSqlMapper">
+
+	<!-- 회원 로그인 확인 -->
+	<select id="selectUserByIdAndPw" resultType="com.ssofun.dto.UserDto">
+		SELECT * FROM tb_user WHERE email = #{email} AND password = #{password}
+	</select>
+
+	<!-- 상품 관리자 로그인 확인 -->
+	<select id="selectShopAdminByIdAndPw" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin 
+		WHERE 
+			login_account = #{login_account} 
+		AND 
+			login_password = #{login_password}
+		AND
+			biz_id IS NOT NULL
+	</select>
+
+	<!-- 회원 로그인 확인 -->
+	<select id="selectSystemAdminByIdAndPw" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin 
+		WHERE 
+			login_account = #{login_account} 
+		AND 
+			login_password = #{login_password}
+		AND
+			biz_id IS NULL
+	</select>
+
+</mapper>

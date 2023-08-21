@@ -1,0 +1,86 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400&display=swap'); */
+
+*{margin: 0; padding: 0; list-style: none; font-family: 'Inter', sans-serif; font-weight: 400; box-sizing: border-box;}
+body{position: relative;}
+a{text-decoration: none; color: black;}
+.section{width: 1200px; margin: 0 auto; position: relative;}
+.section2{width: 1000px; margin: 0 auto;}
+.active-cate{border: 1px solid black; border-radius: 5px;}
+/* div{border: 1px solid grey;} */
+
+.hide{display: none;}
+
+
+#topBg{box-shadow: inset 0 20px 30px rgba(0,0,0,0.02); width: 100%; height: 1000px; background-color: #f8f9fa; position: absolute; top: 100px; left: 0;} /*#FF6462, #f8f9fa, #f16866*/ /*background-image: linear-gradient(180deg,#e9ecef,#ffffff)*/
+div#height{height: auto;}
+
+div.myPage{width: 100%; height: 800px; z-index: 10; position: absolute; top: 0; left: 0;}
+.fakeSection{box-shadow: inset 0 20px 30px rgba(0,0,0,0.01); width: 100%; height: 80px; background-color: #f8f9fa; position: absolute; top: 0; left: 0; overflow: hidden;}
+#myPageTab{width: 180px; height: 70px; position: absolute; bottom: -15px; right: 0; margin-bottom: 0; padding: 0;}
+#myPageTab>li{cursor: pointer; width: 90px; height: 100%; background-color: #dddddd; float: left; border-radius: 15px; text-align: center; line-height: 50px; font-size: 15px; position: relative;}
+#myPageTab>li.click{background-color: white;}
+#myPageTab>li>a{font-weight: bold; color: #888888;}
+#myPageTab>li>a.click{color: #333333;}
+#myPageTab>li>i{display: none;}
+#myPageTab>li>i.click{display: inline-block; position: absolute; bottom: 3px; right: 50%; margin-right: -5px; font-size: 10px; color: #333333;}
+
+#myPageSection{width: 100%; min-height: 700px; display: flex; flex-wrap: wrap; margin-top: 80px;  border-top-left-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; background-color: white;}
+#profile{width: 240px; height: auto; }
+#profile>ul{padding: 50px 30px 0 30px; width: 100%;}
+#profile>ul>li{width: 100%; text-align: center;}
+
+#profile>ul>li#profileIcon{height: 80px; margin-bottom: 14px; }
+#profile>ul>li#profileIcon>span{width: 80px; height: 100%; display: inline-block; border-radius: 80px; background-color: #c5c5c5;}
+
+#profile>ul>li#makerName{font-size: 18px; height: 20px; line-height: 20px; margin-bottom: 10px; font-weight: bold; color: #444444;}
+#profile>ul>li#logout{ font-size: 13px; line-height: 30px; width: 120px; margin: 0 auto; height: 30px; color: #999999;  cursor: pointer; background-color: #f7f7f7; border-radius: 40px; position: relative;}
+
+#profile>dl{margin: 20px 30px 0 30px; border-top: 1px solid #f3f3f3;}
+#profile>dl>dt{width: 100%; height: 40px; line-height: 40px; color: #666666; font-size: 15px; margin-top: 12px;}
+#profile>dl>dd{width: 100%; height: 32px; line-height: 32px; font-size: 13px; margin: 2px 0; position: relative;}
+
+#profile>dl>dd>a{display: inline-block; width: 100%; height: 100%;color: #999999;}
+#profile>dl>dd>a.click{font-weight: bold; color: #666666;}
+
+#profile>dl>dd>i{display: none;}
+#profile>dl>dd>i.click{display: inline-block; position: absolute; right: 0;}
+
+#contents{width: 960px; min-height: 650px; }
+#contents>#leftBorder{margin: 25px 0; padding: 25px 30px; border-left: 1px solid #f3f3f3; min-height: 650px;}
+#leftBorder>#subTitle{width: 100%; height: 40px; display: flex; justify-content: space-between; margin-bottom: 5px; }
+#leftBorder>#subTitle>h5{font-size: 18px; height: 100%; line-height: 40px;  color: #666666; font-weight: bold; display: flex; align-items: center; margin-bottom: 15px;}
+
+#deliveryStatus{padding: 0;width: 100%; height: 32px; line-height: 32px; font-size: 13px; margin-bottom: 25px;}
+#deliveryStatus>li{height: 100%; float: left; color: #777777; padding: 0 13px; margin-right: 8px; border: 1px solid #d9d9d9; border-radius: 20px;}
+#deliveryStatus>li.click{border-color: #FF6462; color: #FF6462; font-weight: bold;}
+
+#leftBorder>div#list{display: flex; flex-wrap: wrap; height: auto;}
+#leftBorder>div#list>div#fundingOrderListEmpty{text-align: center; width: 100%; color: #d9d9d9; height: 120px; line-height: 120px; font-size: 18px; }
+#leftBorder>div#list>div.funding{width: 100%; position: relative; margin-bottom: 15px;}
+#leftBorder>div#list>div.funding:last-of-type{margin-bottom: 0;}
+#leftBorder>div#list>div.funding>span.paymentDate{display: block; font-size: 14px; margin-bottom: 10px; width: 100%; height: 15px; line-height: 15px; font-weight: bold; color: #555555;}
+#leftBorder>div#list>div.funding>a{display: block;  width: 100%;}
+
+#leftBorder>div#list>div.funding>a>dl{width: 100%; height: auto; padding: 20px 15px; border-top: 1px solid #e9e9e9; border-bottom: 1px solid #e9e9e9; }
+#leftBorder>div#list>div.funding>a>dl>dt{float: left; margin-right: 18px; width: 100px; height: 100px; border: 1px solid  #d9d9d9;}
+#leftBorder>div#list>div.funding>a>dl>dt>img{width: 100%;}
+
+#leftBorder>div#list>div.funding>a>dl>dd{width: 630px; margin-left: 118px;}
+#leftBorder>div#list>div.funding>a>dl>dd.title{margin-top: 5px; font-size: 18px; height: 20px; line-height: 20px; font-weight: bold; color: #444444;}
+#leftBorder>div#list>div.funding>a>dl>dd.rewardList{margin-bottom: 15px;}
+#leftBorder>div#list>div.funding>a>dl>dd.rewardList>span.reward{color: #999999; display: block; width: 100%; font-size: 12px; height: 14px; line-height: 14px; margin-bottom: 5px;}
+#leftBorder>div#list>div.funding>a>dl>dd.rewardList>span.reward:last-of-type{margin-bottom: 0;}
+
+#leftBorder>div#list>div.funding>a>dl>dd.deliveryDate{margin-bottom: 5px; font-size: 14px; color: #FF6462; line-height: 16px; height: 16px;}
+#leftBorder>div#list>div.funding>a>dl>dd.totalPrice{font-size: 14px; line-height: 16px; height: 16px; margin-bottom: 0;}
+
+#leftBorder>div#list>div.funding>ul.btnSection{position: absolute; top: 0; right: 0;}
+#leftBorder>div#list>div.funding>ul.btnSection>li.orderDetail{text-align: right; cursor: pointer; font-weight: bold; color: #777777; height: 15px; line-height: 15px; font-size: 13px;}
+#leftBorder>div#list>div.funding>ul.btnSection>li.orderDetail>i{color: #d9d9d9;}
+
+#leftBorder>div#list>div.funding>ul.btnSection>li.deliveryStatusBtn{cursor: pointer; border-radius: 5px; font-size: 13px; color: #555555; line-height: 40px; margin-right: 15px; height: 40px; border: 1px solid #d9d9d9; margin-top: 30px; padding: 0 10px;}
+
+
+

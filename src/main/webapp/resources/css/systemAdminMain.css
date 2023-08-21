@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Noto+Sans+KR&display=swap');
+	.section{margin: 0 auto; width: 1200px;}
+		a {
+            text-decoration-line: none;
+        }
+
+        .leftside1 {
+            background-color: #13161C;
+            height: 180px;
+        }
+
+        .leftside2 {
+            background-color: #1D212A;
+        }
+
+        .leftside3 {
+            background-color: #1D212A;
+            height: 1000px;
+        }
+
+        .leftsidepontstyle1 {
+            color: #B3B8C3;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 400;
+            margin-bottom: 0;
+            text-decoration: none;
+        }
+        .leftsidepontstyleWhite {
+            color: #ffffff ;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 400;
+            margin-bottom: 0;
+            text-decoration: none;
+        }
+        
+        .companySideBarfontBig {
+            color: #B3B8C3;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 400;
+            margin-bottom: 0;
+            text-decoration: none;
+            font-size:18px
+        }
+
+        /*leftsideicolor{color: #B3B8C3;}*/
+        .leftsideicolor {
+            color: white;
+        }
+
+        #leftsideicolor {
+            color: white;
+        }
+
+        .leftsidefontstyle1 {
+            color: #6F737E;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 400;
+        }
+
+        .adminimage {
+            color: #F5F5F5
+        }
+
+        .adminid {
+            color: #F5F5F5;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .adminimage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: white;
+        }
+
+        .adminimagecol {
+            width: 100px;
+            height: 100px;
+            border-radius: 30%;
+            overflow: hidden;
+        }
+        
+        .navbar-brand{
+            color: #6F737E;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 400;
+        }

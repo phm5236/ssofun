@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssofun.www.store.mapper.StoreSqlMapper">
+
+	
+	<!--회원가입 -->
+	<insert id="insert">
+		insert into tb_admin(biz_id, login_account, login_password)values(
+		#{biz_id}, 
+		#{login_account}, 
+		#{login_password}
+		)
+	</insert>
+	
+	<!-- ID 중복확인 -->
+	<select id="countByUserId" resultType="int">
+		SELECT COUNT(*) FROM tb_admin WHERE login_account=#{login_accountd}
+	</select>
+	
+	<!-- 테스트 로그인 -->
+	<select id="selectByIdAndPass" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin WHERE login_account=#{login_account} AND login_password =#{login_password} AND used_fg=1
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="selectByEmailAndPassword" resultType="com.ssofun.dto.ProductUserDto">
+		SELECT * FROM tb_user WHERE email=#{email} AND password =#{password} AND used_fg=1;
+	</select>
+	
+	<!-- 상품등록 -->
+	<insert id="insertByItem">
+		insert into tb_product(admin_id, name, price, price_sale, contents) values(
+		 #{admin_id}, 
+		 #{name},
+		 #{price}, 
+		 #{price_sale}, 
+		 #{contents}
+		 )
+	</insert>	
+	
+	<!-- 상품타입등록 -->
+	<insert id="insertByCaType">
+		insert into tb_product_category_type(this_parent_id, node, name)values(
+		 #{this_parent_id}, 
+		 #{node},
+		 #{name}
+		 )
+	</insert>
+	
+	<!-- 리뷰 등록 -->
+	<insert id="insertByReview">
+		insert into tb_product_review(product_order_item_id, user_id, rate, contents)values(
+			#{product_order_item_id},
+			#{user_id},
+			#{rate},
+			#{contents}
+			)
+	</insert>
+	
+	<!-- 리뷰 이미지 등록 -->
+	<insert id="insertByReviewImg">
+		insert into tb_product_review_image(product_review_id, url, order_list)values(
+		 (SELECT MAX(product_review_id) from tb_product_review),
+		 #{url},
+		 #{order_list}
+		 )
+	</insert>
+	
+	<!-- 썸네일 등록 -->
+	<insert id="insertByThumbnail">
+		insert into tb_product_thumbnail(product_id, name, order_list)values(
+		 #{product_id}, 
+		 #{name},
+		 #{order_list}
+		 )
+	</insert>
+	
+	<!-- 장바구니 등록 -->
+	<insert id="insertByCart">
+		insert into tb_cart(user_id, product_id, count)values(
+		#{user_id},
+		#{product_id},
+		#{count}
+		)
+	</insert>
+	
+	<!-- 배송 받는 사람 등록 -->
+	<insert id="insertByRecipient">
+		insert into tb_delivery_recipient(name, phone, address_post, address_default, address_detail, request_message)values(
+		#{name},
+		#{phone},
+		#{address_post},
+		#{address_default},
+		#{address_detail},
+		#{request_message}
+		)
+	</insert>
+	
+	<!-- 상품 주문 등록 -->
+	<insert id="insertByOrder">
+		insert into tb_product_order(user_id, amount)values(
+		#{user_id},
+		#{amount}
+		)
+	</insert>
+	
+	<!-- 주문 물품 등록 -->
+	<insert id="insertByOrderItem">
+	    insert into tb_product_order_item(product_order_id, product_id, product_order_status_id, delivery_recipient_id, count)
+	    values(
+	        (SELECT MAX(product_order_id) from tb_product_order),
+	        #{product_id},
+	        3,
+	        (SELECT MAX(delivery_recipient_id) from tb_delivery_recipient),
+	        #{count}
+	    )
+	</insert>
+	
+
+	<!-- 장바구니 주문후 물품 제거 등록 -->
+	<update id="cartUpdate">
+	UPDATE tb_cart SET used_fg=0 WHERE product_id=#{product_id}
+	</update>
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteByCart">
+		DELETE FROM tb_cart WHERE user_id = #{user_id} and product_id = #{product_id}
+	</delete>
+	
+	<!-- 상품 리뷰 개수 출력 -->
+	<select id="selectByRecount" resultType="com.ssofun.dto.ProductDto">
+		select  tp.product_id, count(*) as count from tb_product tp
+		inner join tb_product_order_item tpoi on tp.product_id = tpoi.product_id
+		inner join tb_product_review tpv on tpoi.product_order_item_id = tpv.product_order_item_id
+		where tpoi.used_fg=1
+		group by tp.product_id DESC    
+	</select>
+	
+	<!-- 상품목록 최신 등록순출력 -->
+	<select id="selectProductList" resultType="com.ssofun.dto.ProductDto">
+		SELECT tb_product.name AS product_name,
+       	tb_product_category_type.name AS category_type_name,
+       	tb_product_thumbnail.name AS thumbnail_name,
+       	tb_product.price, tb_product.price_sale, tb_product.product_id
+		FROM tb_product
+		INNER JOIN tb_product_category
+		    ON tb_product.product_id = tb_product_category.product_id
+		INNER JOIN tb_product_category_type
+		    ON tb_product_category.product_category_type_id = tb_product_category_type.product_category_type_id
+		INNER JOIN tb_product_thumbnail
+		    ON tb_product.product_id = tb_product_thumbnail.product_id
+		    WHERE tb_product_thumbnail.order_list = 0 and tb_product.used_fg=1
+		    ORDER BY tb_product_thumbnail.product_thumbnail_id DESC
+	</select>
+	
+	<!-- 상품목록 낮은 가격순출력 -->
+	<select id="selectPricelowList" resultType="com.ssofun.dto.ProductDto">
+		SELECT tb_product.name AS product_name,
+       	tb_product_category_type.name AS category_type_name,
+       	tb_product_thumbnail.name AS thumbnail_name,
+       	tb_product.price, tb_product.price_sale, tb_product.product_id
+		FROM tb_product
+		INNER JOIN tb_product_category
+		    ON tb_product.product_id = tb_product_category.product_id
+		INNER JOIN tb_product_category_type
+		    ON tb_product_category.product_category_type_id = tb_product_category_type.product_category_type_id
+		INNER JOIN tb_product_thumbnail
+		    ON tb_product.product_id = tb_product_thumbnail.product_id
+		    WHERE tb_product_thumbnail.order_list = 0 and tb_product.used_fg=1
+		    ORDER BY tb_product.price_sale;
+	</select>
+	
+	<!-- 상품목록 높은 가격순출력 -->
+	<select id="selectPricehighList" resultType="com.ssofun.dto.ProductDto">
+		SELECT tb_product.name AS product_name,
+       	tb_product_category_type.name AS category_type_name,
+       	tb_product_thumbnail.name AS thumbnail_name,
+       	tb_product.price, tb_product.price_sale, tb_product.product_id
+		FROM tb_product
+		INNER JOIN tb_product_category
+		    ON tb_product.product_id = tb_product_category.product_id
+		INNER JOIN tb_product_category_type
+		    ON tb_product_category.product_category_type_id = tb_product_category_type.product_category_type_id
+		INNER JOIN tb_product_thumbnail
+		    ON tb_product.product_id = tb_product_thumbnail.product_id
+		    WHERE tb_product_thumbnail.order_list = 0 and tb_product.used_fg=1
+		    ORDER BY tb_product.price_sale DESC;
+	</select>
+	
+	<!-- 카테고리 출력 -->
+	<select id="selectProductCT" resultType="com.ssofun.dto.ProductCategoryTypeDto">
+		select * from tb_product_category_type
+	</select>
+	
+	<!-- 카테고리 상품 출력 -->
+	<select id="selectProductCTList" resultType="com.ssofun.dto.ProductDto">
+		SELECT tb_product.name AS product_name,
+       	tb_product_category_type.name AS category_type_name,
+       	tb_product_thumbnail.name AS thumbnail_name,
+       	tb_product.price, tb_product.price_sale, tb_product.product_id
+		FROM tb_product
+		INNER JOIN tb_product_category
+		    ON tb_product.product_id = tb_product_category.product_id
+		INNER JOIN tb_product_category_type
+		    ON tb_product_category.product_category_type_id = tb_product_category_type.product_category_type_id
+		INNER JOIN tb_product_thumbnail
+		    ON tb_product.product_id = tb_product_thumbnail.product_id
+		    WHERE tb_product_thumbnail.order_list = 0 and tb_product_category_type.product_category_type_id= #{product_category_type_id} and tb_product.used_fg=1
+		    ORDER BY tb_product_thumbnail.product_thumbnail_id DESC
+	</select>
+		    
+	<!-- 상품상세보기 출력 -->
+	<select id="selectProductListDetail" resultType="com.ssofun.dto.ProductDto">
+		SELECT tb_product.name AS product_name,
+	    tb_product_thumbnail.name AS thumbnail_name,
+	    price, price_sale, biz_name
+		FROM tb_product
+		INNER JOIN tb_product_thumbnail ON tb_product.product_id = tb_product_thumbnail.product_id
+		INNER JOIN tb_admin  ON tb_product.admin_id = tb_admin.admin_id
+		INNER JOIN tb_biz  ON  tb_admin.biz_id = tb_biz.biz_id
+		WHERE tb_product_thumbnail.product_id = #{product_id}
+	</select>
+	
+	<!-- 장바구니 목록 출력 -->
+	<select id="selectCartList" resultType="com.ssofun.dto.ProductUserDto">
+		SELECT tb_user.user_id, tb_cart.product_id, MIN(tb_product_thumbnail.name) AS thumbnail_name,tb_product.name AS product_name, tb_product.price_sale AS price,
+       (SELECT SUM(count) FROM tb_cart AS c WHERE c.user_id = tb_user.user_id AND c.product_id = tb_cart.product_id AND c.used_fg=1) AS total_count
+		FROM tb_user
+		INNER JOIN tb_cart ON tb_user.user_id = tb_cart.user_id
+		INNER JOIN tb_product ON tb_cart.product_id = tb_product.product_id
+		INNER JOIN tb_product_thumbnail ON tb_product.product_id = tb_product_thumbnail.product_id
+		WHERE tb_user.user_id = #{user_id} AND tb_cart.used_fg=1
+		GROUP BY tb_cart.product_id
+	</select>
+	
+	<!-- 마이페이지 주문목록 출력 -->
+	<select id="selectMypageProductList" resultType="com.ssofun.dto.ProductOrderItemDto">
+		SELECT   poi.product_order_item_id, po.product_order_id, tu.user_id, tp.product_id, MIN(tpt.name) AS thumbnail_name, tp.name AS product_name, tp.price_sale,
+    	poi.count, poi.created_at, tpos.name AS order_status_name
+		FROM
+	    tb_product_order_item AS poi
+	    INNER JOIN tb_product_order AS po ON poi.product_order_id = po.product_order_id
+	    INNER JOIN tb_product AS tp ON poi.product_id = tp.product_id
+	    INNER JOIN tb_product_thumbnail AS tpt ON tp.product_id = tpt.product_id
+	    INNER JOIN tb_user AS tu ON po.user_id = tu.user_id
+	    INNER JOIN tb_product_order_status AS tpos ON poi.product_order_status_id = tpos.product_order_status_id
+		WHERE
+		    tu.user_id = #{user_id} AND poi.used_fg=1
+		GROUP BY
+		    po.product_order_id,
+		    tu.user_id,
+		    tp.product_id,
+		    tp.name,
+		    tp.price_sale,
+		    poi.count,
+		    poi.created_at
+		ORDER BY
+		    po.product_order_id DESC;
+	</select>
+	
+	<!-- 주문상세 출력 -->
+	<select id="selectOrderDetailList" resultType="com.ssofun.dto.ProductOrderItemDto">
+		SELECT   poi.product_order_item_id, po.product_order_id, tu.user_id, tp.product_id, MIN(tpt.name) AS thumbnail_name, tp.name AS product_name, tp.price_sale,
+    	poi.count, poi.created_at, tpos.name AS order_status_name, tdr.name AS recipient_name,tdr.phone AS recipient_phone,
+    	tdr.address_post, tdr.address_default, tdr.address_detail, tdr.request_message
+		FROM
+	    tb_product_order_item AS poi
+	    INNER JOIN tb_product_order AS po ON poi.product_order_id = po.product_order_id
+	    INNER JOIN tb_product AS tp ON poi.product_id = tp.product_id
+	    INNER JOIN tb_product_thumbnail AS tpt ON tp.product_id = tpt.product_id
+	    INNER JOIN tb_user AS tu ON po.user_id = tu.user_id
+	    INNER JOIN tb_product_order_status AS tpos ON poi.product_order_status_id = tpos.product_order_status_id
+	    INNER JOIN tb_delivery_recipient AS tdr ON poi.delivery_recipient_id = tdr.delivery_recipient_id
+		WHERE
+		    poi.used_fg=1 AND po.product_order_id = #{product_order_id}
+		GROUP BY
+		    po.product_order_id,
+		    tu.user_id,
+		    tp.product_id,
+		    tp.name,
+		    tp.price_sale,
+		    poi.count,
+		    poi.created_at
+	</select>
+	
+	<!-- 리뷰 -->
+	<select id="selectReview" resultType="com.ssofun.dto.ProductOrderItemDto">
+		SELECT   po.product_order_id, tu.user_id, tp.product_id, MIN(tpt.name) AS thumbnail_name, tp.name AS product_name, tp.price_sale,
+    	poi.count, poi.created_at, ta.admin_id, tb.biz_id
+		FROM
+	    tb_product_order_item AS poi
+	    INNER JOIN tb_product_order AS po ON poi.product_order_id = po.product_order_id
+	    INNER JOIN tb_product AS tp ON poi.product_id = tp.product_id
+	    INNER JOIN tb_product_thumbnail AS tpt ON tp.product_id = tpt.product_id
+	    INNER JOIN tb_user AS tu ON po.user_id = tu.user_id
+        INNER JOIN tb_admin AS ta ON tp.admin_id= ta.admin_id
+        INNER JOIN tb_biz AS tb ON ta.biz_id= tb.biz_id
+		WHERE poi.used_fg=1 AND poi.product_order_item_id = #{product_order_item_id};
+	</select>
+	
+	<!-- 주소 출력 -->
+	<select id="selectRecipient" resultType="com.ssofun.dto.ProductRecipient">
+		select * from tb_delivery_recipient order by delivery_recipient_id DESC LIMIT 1
+	</select>
+	
+	<!-- 상품 좋아요 클릭 -->
+	<insert id="insertLike">
+		insert into tb_product_favorit(product_id,user_id)values(
+			#{product_id},
+			#{user_id}
+			)
+	</insert>
+	<!-- 상품 좋아요 취소 -->
+	<delete id="deleteLike">
+		DELETE FROM tb_product_favorit
+		WHERE product_id = #{product_id}
+		AND user_id = #{user_id}
+	</delete>
+	
+	<!-- 고객마다 상품 좋아요 개수 -->
+	<select id="countMyLike" resultType="int">
+		SELECT COUNT(*) FROM tb_product_favorit
+		WHERE product_id = #{product_id}
+		AND user_id = #{user_id}
+	</select>
+	
+	<!-- 상품마다 좋아요 개수 -->
+	<select id="countLikeByProductId" resultType="int">
+		SELECT COUNT(*) FROM tb_product_favorit
+		WHERE product_id = #{product_id}
+	</select>
+	
+	<!-- 상품마다 좋아요 출력 -->
+	<select id="likeCountByProductId" resultType="com.ssofun.dto.ProductFavoritCountDto">
+		SELECT COUNT(*) AS count, product_id FROM tb_product_favorit where product_id =44
+	</select>	
+	
+	<!-- 상품마다 리뷰 출력 -->
+	<select id="selectProductReview" resultType="com.ssofun.dto.ProductReviewJiDto">
+		select tpr.rate, tpr.contents, tu.name as uname, tpoi.product_id as product_id	
+		,tpr.created_at	as 	created_at, tpr.product_review_id	
+		from tb_product_review tpr
+		inner join tb_user tu on tpr.user_id = tu.user_id
+		inner join tb_product_order_item tpoi on tpr.product_order_item_id = tpoi.product_order_item_id
+		where tpoi.product_id= #{product_id} AND tpr.used_fg=1 order by created_at
+	</select>
+	
+	<!-- 상품마다 리뷰 이미지 출력 -->
+	<select id="selectReviewImg" resultType="com.ssofun.dto.ProductReviewImageDto">
+		select * from tb_product_review_image;
+	</select>
+	
+	<!-- 상품마다 상세이미지 출력 -->
+	<select id="selectByDetailImg" resultType="com.ssofun.dto.ProductDetailImageDto">
+		select * from tb_product_detail_image where product_id=#{product_id}
+	</select>
+	<!-- 리뷰 작성하기 비교하는용 -->
+	<select id="selectByReview" resultType="com.ssofun.dto.ProductReviewDto">
+		select * from tb_product_review where user_id  =#{user_id}
+	</select>
+	
+	<!-- 리뷰 수정후 이전 리뷰제거 -->
+	<update id="reUpdate">
+		UPDATE tb_product_review SET used_fg=0 WHERE product_order_item_id=#{product_order_item_id}
+	</update>
+	
+	<!-- 문의하기 입력 -->
+	<insert id="insertQna">
+		insert into tb_qna(admin_id, user_id, biz_id, title, contents)values(
+			#{admin_id},
+			#{user_id},
+			#{biz_id},
+			#{title},
+			#{contents}
+			)
+	</insert>
+	
+	<!-- 문의내역 출력 -->
+	<select id="selectByQnalist" resultType="com.ssofun.dto.QnaDto">
+		SELECT * FROM tb_qna tq WHERE tq.user_id=#{user_id} AND tq.biz_id IS NOT NULL;
+	</select>
+	<!-- 아래는 테스트 코드 -->
+	
+	<!-- <insert id="insert">
+		insert into tb_user_test(id,pass,nickname,created_at) values(
+		 #{id}, 
+		 #{pass},
+		 #{nickname}, 
+		 CURRENT_TIMESTAMP()
+		 )
+	</insert>-->
+	
+	<!-- ID 중복확인 -->
+	<!--<select id="countByUserId" resultType="int">
+		SELECT COUNT(*) FROM tb_user_test WHERE id=#{id}
+	</select> -->
+	
+	<!-- 상품입력 -->
+	<!-- <insert id="insertByItem">
+		insert into tb_item(category_id, item_name, item_explain, item_price, image_link,created_at) values(
+		 #{category_id}, 
+		 #{item_name},
+		 #{item_explain}, 
+		 #{item_price}, 
+		 #{image_link}, 
+		 CURRENT_TIMESTAMP()
+		 )
+	</insert> -->
+	
+</mapper>

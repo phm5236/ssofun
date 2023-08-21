@@ -1,0 +1,278 @@
+@charset "UTF-8";
+
+ul, li {
+	list-style-type: none;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: inherit; /* 링크의 색상 제거 */
+}
+.bg{
+	background-color: #f4f4f4;
+	padding: 30px 0 44px;
+}
+.col-cart{
+	background-color: #ffffff;
+	border-radius: 16px;
+ 	padding: 0 52px;
+    width: 1280px;
+}
+.cart-ma{
+	    padding: inherit;
+}
+.c1 {
+	width: 1200px;
+	height: 100px;
+	margin: auto;
+}
+
+.nav-link {
+	color: black;
+}
+
+
+
+
+
+.col-title {
+	height: 40px;
+	margin-top: 30px;
+	font: Noto Sans KR;
+	font-size: 24px;
+	color: #333;
+}
+
+.col-contents {
+	width: 1100px;
+}
+
+.col-customer {
+	margin-top: 20px;
+}
+
+.customer-h2 {
+	margin-bottom: 8px;
+	font-size: 20px;
+	font-weight: 700;
+	color: #333;
+}
+
+.all-event-check{
+	width: 40px;
+	border: solid #e4e4e4;
+	border-width: 0 1px 1px 0;
+	padding: 7px 10px 7px 15px;
+	font-weight: 700;
+	text-align: center;
+	background: #f4f4f4;
+}
+.event-check{
+	width: 40px;
+	border: solid #e4e4e4;
+	border-width: 0 1px 1px 0;
+	padding: 7px 10px 7px 15px;
+	font-weight: 700;
+	text-align: center;
+	background: #f4f4f4;
+}
+.td-image{
+	border-bottom: 1px solid #e4e4e4;
+	padding: 10px 16px;
+	text-align: center;
+}
+.td-productInfo{
+	border-bottom: 1px solid #e4e4e4;
+	padding: 10px 16px;
+	text-align: center;
+}
+
+.product-name {
+	text-align: left;
+    font-weight: 700;
+    font-size: 14px;
+    border-bottom: 1px solid #e2e5e7;
+    padding-bottom: 5px;
+    
+}
+
+.option-select{
+    float: right;
+    font-size: 12px;
+}
+
+.cart-price{
+	margin-top: 10px;
+}
+
+.custom-element {
+    display: flex;
+    align-items: center;
+}
+
+.prod-quantity__plus{
+	border: 1px solid #ddd;;
+	background-color: #fff;
+	width: 24px;
+    height: 24px;
+}
+.prod-quantity__minus{
+	border: 1px solid #ddd;;
+	background-color: #fff;
+	width: 24px;
+    height: 24px;
+	
+}
+.prod-quantity__input{
+	border: 1px solid #ddd;;
+	font-weight: bold;
+	text-align: center;
+	width: 44px;
+    height: 24px;
+}
+
+.td-price{
+	border-bottom: 1px solid #e4e4e4;
+	padding: 10px 16px;
+	text-align: center;
+}
+.td-quantity{
+	border-bottom: 1px solid #e4e4e4;
+	padding: 10px 16px;
+	text-align: center;
+}
+.td-shipping{
+	border-bottom: 1px solid #e4e4e4;
+	padding: 10px 16px;
+	text-align: center;
+}
+.td-total{
+	border-bottom: 1px solid #e4e4e4;
+	padding: 10px 16px;
+	text-align: center;
+}
+.td-delete{
+	border-bottom: 1px solid #e4e4e4;
+	padding: 10px 16px;
+	text-align: center;
+}
+.customer-td2 {
+	border-bottom: 1px solid #e4e4e4;
+	padding: 10px 16px;
+}
+
+.customer-table {
+	width: 100%;
+	border-top: 2px solid #cecece;
+}
+
+.cart-total-price {
+    border: 1px solid black;
+    text-align: center;
+    margin-top: 30px;
+}
+.center{
+	 display : flex;
+
+	  justify-content: center;
+}
+.s-price{
+	font-size: 13px;	
+    margin-right: 10px;
+}
+.e-price{
+	font : 700 17px/17px tahoma;
+	font-weight:900;
+	color:#111;
+}
+
+.s-shipping{
+	font-size: 13px;
+    margin-right: 10px;
+}
+.e-shipping{
+	font : 700 17px/17px tahoma;
+	font-weight:900;
+	color:#111;
+}
+.s-sale{
+	font-size: 13px;
+    margin-right: 10px;
+}
+.e-sale{
+	font : 700 17px/17px tahoma;
+	font-weight:900;
+	color:#111;
+}
+.s-total{
+	font-size: 13px;
+    margin-right: 10px;
+}
+.e-total{
+	font : 700 17px/17px tahoma;
+	font-weight:900;
+	color:#ff0038;
+}
+.col-price{
+	
+	width: 185px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+.col-shipping{
+
+	width: 130px;
+    display: flex;
+    align-items: center;
+	
+}
+.col-sale{
+	
+	width: 145px;
+    display: flex;
+    align-items: center;
+	
+}
+.col-total{
+	
+	width: 170px;
+    display: flex;
+    align-items: center;
+	
+}
+.col-plus{
+	width:80px;	
+	display: flex;
+    align-items: center;
+    margin-left: 35px;
+}
+.col-minus{
+	width:80px;	
+	display: flex;
+    align-items: center;
+}
+.col-equal{
+	width:80px;	
+	display: flex;
+    align-items: center;
+}
+
+.col-buy-btn{
+    display: flex;
+    justify-content: center;
+	margin-top: 30px;
+	margin-bottom: 50px;
+}
+
+.prod-buy-btn {
+	display: block;
+	background: #FF6462;
+	border-radius: 2%;
+	border: none;
+	color: #FFFFFF;
+	width: 300px;
+	height: 55px;
+	float: left;
+}

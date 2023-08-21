@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.ssofun.www.community.mapper.CommunitySqlMapper">
+
+
+	<!--커뮤니티 글 등록 -->
+	<insert id= "communityWriteInsert">
+		INSERT INTO tb_community (community_category_id,user_id, title, contents, read_count, created_at)
+		VALUES(
+				#{community_category_id},
+				#{user_id},
+				#{title},
+				#{contents},
+				0,
+				CURRENT_TIMESTAMP()
+				)
+	</insert>
+	
+	
+	<!--커뮤니티 글 리스트 출력 -->
+	<select id="communitySelectList" resultType="com.ssofun.dto.CommunityDto">
+	
+		select*
+		from tb_community
+		order by community_id desc
+	
+	</select>
+	
+	
+	<!--유저 테이블 프라이머리키로 검색 -->
+	<select id="selectByUserId" resultType="com.ssofun.dto.UserDto">
+	
+		select*
+		from tb_user
+		where user_id = #{user_id}
+	
+	</select>
+	
+	
+	<!--커뮤니티 테이블 프라이머리키로 검색 -->
+	<select id="selectByCommunityId" resultType="com.ssofun.dto.CommunityDto">
+	
+		select*
+		from tb_community
+		where community_id = #{community_id}
+	
+	</select>
+	
+	<!-- 커뮤니티 댓글 테이블 프라이머리키로 검색 -->
+	<select id="selectByCommunityCommentId" resultType="com.ssofun.dto.CommunityCommentDto">
+		select *
+		from tb_community_comment
+		 where community_comment_id = #{community_comment_id}
+	</select>
+	
+	<!-- 커뮤니티 카테고리 테이블 프라이머리키로 검색 -->
+	<select id="selectByCommunityCategoryId" resultType="com.ssofun.dto.CommunityCategoryDto">
+		select * 
+		from tb_community_category 
+		where community_category_id = #{community_category_id}
+	</select>
+	
+	<!-- 관리 테이블 프라이머리키로 검색 -->
+	<select id="selectByAdminId" resultType="com.ssofun.dto.AdminDto">
+		select * 
+		from tb_admin 
+		where admin_id = #{admin_id}
+	</select>
+	
+	<!-- 공지사항 테이블 프라이머리키로 검색 -->
+	<select id="selectByCommunityNoticeId" resultType="com.ssofun.dto.CommunityNoticeDto">
+		select * from tb_community_notice 
+		where community_notice_id = #{community_notice_id}
+	</select>
+	
+	<!--조회수 증가 -->
+	<update id="increaseReadCount">
+		UPDATE tb_community 
+		SET read_count = read_count + 1
+		WHERE community_id = #{community_id}
+	</update>
+	
+	<!-- 공지사항 조회수 증가 -->
+	<update id="increaseNoticeReadCount">
+		UPDATE tb_community_notice 
+		SET read_count = read_count + 1
+		WHERE community_notice_id = #{community_notice_id}
+	</update>
+	
+	<!--글 삭제  -->
+	<delete id="deleteById">
+		DELETE FROM tb_community WHERE community_id = #{community_id}
+	</delete>
+	
+	
+	<!--글 수정  -->
+	<update id="contentsUpdate">
+		UPDATE tb_community
+		SET title = #{title}, contents = #{contents}
+		WHERE community_id = #{community_id}
+	</update>
+	
+	
+	<!-- 댓글 등록 -->
+	<insert id="commentInsert">
+		insert into tb_community_comment
+		(community_id, user_id, parent_id, comment, created_at, used_fg) 
+	   	 values (
+			   #{community_id},
+			   #{user_id},
+			   #{parent_id},
+			   #{comment}, 
+			   current_timestamp(),
+			   1
+			   )
+	</insert>
+	
+	
+	
+	<!--댓글 리스트 출력 -->
+<!-- 	<select id="communitySelectComment" resultType="com.ssofun.dto.CommunityCommentDto">
+	
+		select*
+		from tb_community_comment
+		order by created_at asc
+	
+	</select> -->
+	
+	<!-- 하나에 게시글에 대한 댓글 리스트 출력 -->
+	<select id="communitySelectCommentList" resultType="com.ssofun.dto.CommunityCommentDto">
+		select *
+		 from tb_community_comment 
+		 where community_id = #{community_id}
+		 order by created_at asc
+	</select>
+	
+	<!--게시글에 달린 댓글 수 -->
+	<select id="getCommentCount" resultType="int">
+	SELECT COUNT(*) FROM tb_community_comment WHERE community_id = #{community_id}
+	</select>
+	
+	<insert id = "insertNotice" >
+	insert into tb_notice(admin_id,notice_category_id,title,contents,created_at,used_fg) 
+	value(
+		#{admin_id},
+		#{notice_category_id},
+		#{title},
+		#{contents},
+		current_timestamp(),
+		1
+		)
+	</insert>
+	
+	<!-- 카테고리 리스트 뽑아오기 -->
+	<select id="communityCategoryList" resultType="com.ssofun.dto.CommunityCategoryDto">
+		select * from tb_community_category;
+	</select>
+	
+	<!-- 커뮤니티 공지사항 등록 -->
+	<insert id="insertCommunityNotice">
+		INSERT INTO tb_community_notice (admin_id, title, contents, read_count, created_at)
+		VALUES(
+				#{admin_id},
+				#{title},
+				#{contents},
+				0,
+				CURRENT_TIMESTAMP()
+				)
+	</insert>
+	
+	<!-- 공지사항 리스트(3개만) -->
+	<select id="communityNoticeListLimit3" resultType="com.ssofun.dto.CommunityNoticeDto">
+		select * from tb_community_notice
+		order by created_at desc
+		limit 3	
+	</select>
+	
+	<!-- 공지사항 리스트 -->
+	<select id="communityNoticeList" resultType="com.ssofun.dto.CommunityNoticeDto">
+		select * from tb_community_notice
+		order by created_at desc
+	</select>	
+	
+	<!-- 커뮤니티 카테고리별 리스트 -->
+	<select id="communityCategoryListById" resultType="com.ssofun.dto.CommunityDto">
+		select * from tb_community where community_category_id = #{community_category_id} order by created_at desc
+	</select>
+	
+</mapper>

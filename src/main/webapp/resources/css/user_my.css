@@ -1,0 +1,59 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400&display=swap'); */
+
+*{margin: 0; padding: 0; list-style: none; font-family: 'Inter', sans-serif; font-weight: 400; box-sizing: border-box;}
+body{position: relative;}
+a{text-decoration: none; color: black;}
+.section{width: 1200px; margin: 0 auto; position: relative;}
+.section2{width: 1000px; margin: 0 auto;}
+.active-cate{border: 1px solid black; border-radius: 5px;}
+/* div{border: 1px solid grey;} */
+
+.hide{display: none;}
+
+
+#topBg{box-shadow: inset 0 20px 30px rgba(0,0,0,0.02); width: 100%; height: 1000px; background-color: #f8f9fa; position: absolute; top: 100px; left: 0;} /*#FF6462, #f8f9fa, #f16866*/ /*background-image: linear-gradient(180deg,#e9ecef,#ffffff)*/
+div.myPage{width: 100%; height: 800px; z-index: 10; position: absolute; top: 0; left: 0;}
+.fakeSection{box-shadow: inset 0 20px 30px rgba(0,0,0,0.01); width: 100%; height: 80px; background-color: #f8f9fa; position: absolute; top: 0; left: 0; overflow: hidden;}
+#myPageTab{width: 180px; height: 70px; position: absolute; bottom: -15px; right: 0; margin-bottom: 0; padding: 0;}
+#myPageTab>li{width: 90px; height: 100%; background-color: #dddddd; float: left; border-radius: 15px; text-align: center; line-height: 50px; font-size: 15px; position: relative;}
+#myPageTab>li.click{background-color: white;}
+#myPageTab>li>a{font-weight: bold; color: #888888;}
+#myPageTab>li>a.click{color: #333333;}
+#myPageTab>li>i{display: none;}
+#myPageTab>li>i.click{display: inline-block; position: absolute; bottom: 3px; right: 50%; margin-right: -5px; font-size: 10px; color: #333333;}
+
+#myPageSection{width: 100%; min-height: 700px; display: flex; flex-wrap: wrap; margin-top: 80px;  border-top-left-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; background-color: white;}
+#profile{width: 240px; height: 400px; }
+#profile>ul{padding: 50px 30px 0 30px; width: 100%;}
+#profile>ul>li{width: 100%; text-align: center;}
+
+#profile>ul>li#profileIcon{height: 80px; margin-bottom: 14px; padding: 0;}
+#profile>ul>li#profileIcon>span{width: 80px; height: 100%; display: inline-block; border-radius: 80px; background-color: #c5c5c5;}
+
+#profile>ul>li#makerName{font-size: 18px; height: 20px; line-height: 20px; margin-bottom: 10px; font-weight: bold; color: #444444;}
+#profile>ul>li#logoutUser{padding: 0; font-size: 13px; line-height: 30px; width: 120px; margin: 0 auto; height: 30px; color: #999999;  cursor: pointer; background-color: #f7f7f7; border-radius: 40px; position: relative;}
+
+#profile>dl{margin: 20px 30px 0 30px; border-top: 1px solid #f3f3f3;}
+#profile>dl>dt{width: 100%; height: 40px; line-height: 40px; color: #666666; font-size: 15px; margin-top: 12px;}
+#profile>dl>dd{width: 100%; height: 32px; line-height: 32px; font-size: 13px; margin: 2px 0; position: relative;}
+
+#profile>dl>dd>a{display: inline-block; width: 100%; height: 100%;color: #999999;}
+#profile>dl>dd>a.click{font-weight: bold; color: #666666;}
+
+#profile>dl>dd>i{display: none;}
+#profile>dl>dd>i.click{display: inline-block; position: absolute; right: 0;}
+
+#contents{width: 960px; height: 100%; }
+#contents>#leftBorder{margin: 25px 0; padding: 25px 30px; border-left: 1px solid #f3f3f3;}
+#leftBorder>#subTitle{width: 100%; height: 40px; display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #f2f2f2;}
+#leftBorder>#subTitle>h5{font-size: 18px; height: 100%; line-height: 40px;  color: #666666; font-weight: bold; display: flex; align-items: center; margin-bottom: 15px;}
+
+#leftBorder>div#list{display: flex; flex-wrap: wrap;}
+
+
+
+
+
+

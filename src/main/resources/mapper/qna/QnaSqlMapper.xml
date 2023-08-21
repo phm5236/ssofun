@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"><!-- 스키마정의  -->
+
+<mapper namespace="com.ssofun.www.qna.mapper.QnaSqlMapper">
+
+<!--최근qnaId가져오기  -->
+	<select id="selectQnaByLatestQnaId" resultType="int">
+		select max(qna_id) from tb_qna
+	</select>
+
+<!-- DB에서 아이디와 비번가져오기 다시로그인처리-->
+	<select id="getUserByEmailAndPw" resultType="com.ssofun.dto.UserDto">
+		SELECT * FROM tb_user WHERE email = #{email} AND password = #{password}
+	</select>
+
+
+<!-- qna유저글작성 -->
+	<insert id="insertQna">
+	 	INSERT INTO tb_qna(user_id ,title, contents,created_at,used_fg)
+		VALUES(#{user_id},#{title},#{contents}, now(),1)
+	</insert>
+	
+	
+<!-- 작성된qna글목록가져오기 -->	
+	<select id="qnaListByUserId" resultType="com.ssofun.dto.QnaDto">
+		select * from tb_qna where user_id = #{user_id} and biz_id is null order by qna_id DESC
+	</select>
+	
+	
+
+	
+
+
+<!--이메일로 유저정보가져오기 (아직필요X) -->
+	<select id="selectUserDtoByEmail" resultType="com.ssofun.dto.UserDto">
+		SELECT * FROM tb_user WHERE user_id = #{user_id}
+	</select>	
+	
+	
+<!-- qnaImage삽입 -->
+	<insert id="insertQnaImage">
+		INSERT INTO tb_qna_image(qna_id, original_filename, link, created_at, used_fg)
+    	VALUES(#{qna_id},#{original_filename},#{link},now(),1)
+	</insert>
+
+<!-- qnaId로 이미지정보가져옴 -->
+	<select id="selectQnaImageByQnaId" resultType="com.ssofun.dto.Qna_ImageDto">
+		select * from tb_qna_image where qna_id = #{qna_id}
+	</select>
+
+	
+	
+<!-- qna_id로 글정보가져오기 -->	
+	<select id="selectQnaDataBYQnaId" resultType="com.ssofun.dto.QnaDto">
+		SELECT * FROM tb_qna WHERE qna_id = #{qna_id}
+	</select>
+	
+	
+</mapper>
